@@ -1,0 +1,45 @@
+# Ignorar arquivos Python gerados
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignorar ambientes virtuais
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# Ignorar arquivos de configuração local
+.env
+.env.local
+.env.*.local
+
+# Ignorar arquivos específicos do Streamlit
+.streamlit/
+
+# Ignorar arquivos de cache e logs
+*.log
+*.sqlite
+*.db
+*.cache
+.pytest_cache/
+
+# Ignorar diretórios de build e distribuição
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Ignorar arquivos de IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Ignorar arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos de notebook (se usado)
+.ipynb_checkpoints/
