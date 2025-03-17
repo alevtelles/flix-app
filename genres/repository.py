@@ -8,7 +8,7 @@ class GenreRepository():
         self.__base_url = 'https://alexvtelles.pythonanywhere.com/api/v1/'
         self.__genres_url = f'{self.__base_url}genres/'
         self.__headers = {
-            'Authorization': f'Bearer{st.session_state.tokne}'
+        'Authorization': f'Bearer {st.session_state.token}'
         }
 
     def get_genres( self):
