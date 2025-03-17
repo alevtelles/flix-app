@@ -17,3 +17,4 @@ class MovieService:
             actors=actors,
             resume=resume,
         )
+        return self.movie_repository.create_movie(movie)
