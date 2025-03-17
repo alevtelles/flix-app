@@ -1,33 +1,49 @@
 import pandas as pd
 import streamlit as st
+from datetime import datetime
 from st_aggrid import AgGrid
-
-actors =[
-    {'id': 1, 'name': 'Tom Hanks'},
-    {'id': 2, 'name': 'Leonardo DiCaprio'},
-    {'id': 3, 'name': 'Meryl Streep'},
-    {'id': 4, 'name': 'Denzel Washington'},
-    {'id': 5, 'name': 'Julia Roberts'},
-    {'id': 6, 'name': 'Will Smith'},
-    {'id': 7, 'name': 'Angelina Jolie'},
-    {'id': 8, 'name': 'Brad Pitt'},
-    {'id': 9, 'name': 'Johnny Depp'},
-    {'id': 10, 'name': 'Sandra Bullock'},
-    {'id': 11, 'name': 'Tom Cruise'},
-    {'id': 12, 'name': 'Harrison Ford'},    
-]
+from actors.service import ActorService
 
 
 def show_actors():
-    st.write('Lista de Atores/Atrizes')
+    actor_service = ActorService()
+    actors = actor_service.get_actors()
 
-    AgGrid(
-        data=pd.DataFrame(actors),
-        reload_data=True,
-        key='actors_grid',
-    )
+    if actors:
+        st.write('Lista de Atores/Atrizes')
+        actors_df = pd.json_normalize(actors)
+
+        AgGrid(
+            data=actors_df,
+            reload_data=True,
+            key='actors_grid',
+        )
+    else: 
+        st.warning('Nenhum ator/atriz encontrado.')
 
     st.title('Cadastrar novo Ator/Atriz')
     name = st.text_input('Nome do Ator/Atriz')
+    birthday = st.date_input(
+        label='Data de Nascimento',
+        value=datetime.today(),
+        min_value=datetime(1900, 1, 1),
+        max_value=datetime.today(),
+        format='DD/MM/YYYY',
+    )
+    nationality_dropdown = ['EUA',  'BRAZIL', 'ARG', 'MEX','COL', 'ES', 'FRA', 'ITA', 'GER','UK', 'PR', 'AU', 'ZA', 'NZ', 'Nova Zelândia']
+    nationality = st.selectbox(
+        label='Nacionalidade',
+        options=nationality_dropdown,
+    )
+    biography = st.text_area('Biografia')
     if st.button('Cadastrar'):
-        st.success(f'Ator/Atriz "{name}" cadastrado com sucesso')
+        new_actor = actor_service.create_actor(
+            name=name,
+            birthday=birthday,
+            nationality=nationality,
+            biography=biography
+        )
+        if new_actor:
+            st.rerun()
+        else:
+            st.error('Erro ao cadastrar ator/atriz.')
