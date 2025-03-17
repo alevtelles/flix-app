@@ -1,3 +1,7 @@
+from datetime import datetime
+import streamlit as st
+from actors.service import ActorService
+from genres.service import GenreService
 from movies.repository import MovieRepository
 
 
@@ -18,3 +22,5 @@ class MovieService:
             resume=resume,
         )
         return self.movie_repository.create_movie(movie)
+    
+   

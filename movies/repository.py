@@ -14,7 +14,7 @@ class MovieRepository:
 
     def get_movies(self):
         response = requests.get(
-            self.__moveies_url,
+            self.__movies_url,
             headers=self.__headers
         )
         if response.status_code == 200:
