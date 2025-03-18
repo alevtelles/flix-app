@@ -18,7 +18,7 @@ def show_actors():
             reload_data=True,
             key='actors_grid',
         )
-    else: 
+    else:
         st.warning('Nenhum ator/atriz encontrado.')
 
     st.title('Cadastrar novo Ator/Atriz')
@@ -30,7 +30,23 @@ def show_actors():
         max_value=datetime.today(),
         format='DD/MM/YYYY',
     )
-    nationality_dropdown = ['EUA',  'BRAZIL', 'ARG', 'MEX','COL', 'ES', 'FRA', 'ITA', 'GER','UK', 'PR', 'AU', 'ZA', 'NZ', 'Nova Zelândia']
+    nationality_dropdown = [
+        'EUA',
+        'BRAZIL',
+        'ARG',
+        'MEX',
+        'COL',
+        'ES',
+        'FRA',
+        'ITA',
+        'GER',
+        'UK',
+        'PR',
+        'AU', 
+        'ZA', 
+        'NZ', 
+        'Nova Zelândia',
+        ]
     nationality = st.selectbox(
         label='Nacionalidade',
         options=nationality_dropdown,
